@@ -1,10 +1,9 @@
 package TP_INFO708_GUI.src;
 
-import java.io.*;
-
 import TP_INFO708_GUI.src.model.DataToMeasure;
 import TP_INFO708_GUI.src.model.Device;
 import TP_INFO708_GUI.src.model.Sensor;
+import TP_INFO708_GUI.src.view.MainFrame;
 
 public class MineDrainSystem{
     public static void main(String[] args){
@@ -15,5 +14,7 @@ public class MineDrainSystem{
         Sensor water = new Sensor(DataToMeasure.H2O);
         Sensor methane = new Sensor(DataToMeasure.CH4);
         Sensor carbonMonoxide = new Sensor(DataToMeasure.CO);
+
+        MainFrame mainFrame = new MainFrame();
     }
 }
