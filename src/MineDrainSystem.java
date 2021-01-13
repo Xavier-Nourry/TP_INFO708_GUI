@@ -6,7 +6,7 @@ import TP_INFO708_GUI.src.model.DataToMeasure;
 import TP_INFO708_GUI.src.model.Device;
 import TP_INFO708_GUI.src.model.Sensor;
 
-public class MineDrainSystem(){
+public class MineDrainSystem{
     public static void main(String[] args){
         System.out.println("Running...");
         
