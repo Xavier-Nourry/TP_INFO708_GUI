@@ -1,9 +1,7 @@
 package TP_INFO708_GUI.src;
 
-import TP_INFO708_GUI.src.model.DataToMeasure;
-import TP_INFO708_GUI.src.model.Device;
-import TP_INFO708_GUI.src.model.Sensor;
-import TP_INFO708_GUI.src.view.MainFrame;
+import TP_INFO708_GUI.src.model.*;
+import TP_INFO708_GUI.src.view.*;
 
 public class MineDrainSystem{
     public static void main(String[] args){
