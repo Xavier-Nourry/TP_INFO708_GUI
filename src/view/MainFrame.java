@@ -4,6 +4,10 @@ import java.awt.*;
 
 public class MainFrame extends Frame{
     public MainFrame(){
+        setSize(800, 600);
+        setTitle("Système de drainage dans une mine");
+        setLayout(new GridLayout(5,4));
+
         Label waterLabel = new Label("Niveau d'eau :");
         Label waterLevelLabel = new Label("0.0f");
         Label CO_Label = new Label("Niveau de CO :");
@@ -17,9 +21,7 @@ public class MainFrame extends Frame{
         add(CO_LevelLabel);
         add(CH4_Label);
         add(CH4_LevelLabel);
-
-        setLayout(null);
-        setSize(800, 600);
+        
         setVisible(true);
     }
 }
