@@ -50,10 +50,30 @@ public class MainFrame extends JFrame{
         CH4_ElementsContainer.add(CH4_DecreasingLevelAlert, null);
         CH4_ElementsContainer.add(CH4_IncreasingLevelAlert, null);
         
+        /*################# Fan #################*/
+        Label fanLabel = new Label("Ventilateur :");
+        AlertLight fanAlert = new AlertLight(Color.RED);
+        FlowLayout fanElementsLayout = new FlowLayout();
+        Container fanElementsContainer = new Container();
+        fanElementsContainer.setLayout(fanElementsLayout);
+        fanElementsContainer.add(fanLabel, null);
+        fanElementsContainer.add(fanAlert, null);
+
+        /*################# Pump #################*/
+        Label pumpLabel = new Label("Pompe :");
+        AlertLight pumpAlert = new AlertLight(Color.RED);
+        FlowLayout pumpElementsLayout = new FlowLayout();
+        Container pumpElementsContainer = new Container();
+        pumpElementsContainer.setLayout(pumpElementsLayout);
+        pumpElementsContainer.add(pumpLabel, null);
+        pumpElementsContainer.add(pumpAlert, null);
+
         /*################# Ajout des éléments à la fenêtre #################*/
         add(waterElementsContainer);
         add(CH4_ElementsContainer);
         add(CO_ElementsContainer);
+        add(fanElementsContainer);
+        add(pumpElementsContainer);
     
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
