@@ -160,7 +160,11 @@ public class MainFrame extends JFrame implements Observer{
         pumpElementsContainer.add(pumpAlert, null);
 
         /*################# Bouton de lancement et d'arrêt du système #################*/
-        Button startStop = new Button("Lancer le système");
+        Button startStopButton = new Button("Lancer le système");
+        FlowLayout startStopButtonLayout = new FlowLayout();
+        Container startStopButtonContainer = new Container();
+        startStopButtonContainer.setLayout(startStopButtonLayout);
+        startStopButtonContainer.add(startStopButton);
 
         /*################# Ajout des éléments à la fenêtre #################*/
         add(waterElementsContainer);
@@ -168,7 +172,7 @@ public class MainFrame extends JFrame implements Observer{
         add(CO_ElementsContainer);
         add(fanElementsContainer);
         add(pumpElementsContainer);
-        add(startStop);
+        add(startStopButtonContainer);
     
         /*################# Observables configuration #################*/
         fan.addObserver(this);
