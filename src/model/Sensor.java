@@ -19,5 +19,9 @@ public class Sensor extends Observable{
         notifyObservers();
     }
 
-    public float readValue(){ return this.valueMeasured; }
+    public void updateLastMeasuredValue() { this.lastValueMeasured = this.valueMeasured; }
+
+    public float readCurrentValue(){ return this.valueMeasured; }
+
+    public float readLastMeasuredValue(){ return this.lastValueMeasured; }
 }
