@@ -1,24 +1,26 @@
 package TP_INFO708_GUI.src.view;
 
 import java.awt.*;
-import java.util.Observer;
-import java.util.Observable;
+import java.awt.event.*;
+import java.util.*;
 import javax.swing.JFrame;
 
 import TP_INFO708_GUI.src.model.*;
 import TP_INFO708_GUI.src.view.*;
 
-public class MainFrame extends JFrame implements Observer{
-    private Label waterLevelLabel;
+public class MainFrame extends JFrame implements Observer, ActionListener{
+    private boolean systemRunning;
+    private Button startStopButton;
+    private Label H2O_LevelLabel;
     private Label CO_LevelLabel;
     private Label CH4_LevelLabel;
     private Device fan;
     private Device pump;
-    private Sensor water;
+    private Sensor H2O_;
     private Sensor methane;
     private Sensor carbon;
-    private AlertLight waterDecreasingLevelAlert;
-    private AlertLight waterIncreasingLevelAlert;
+    private AlertLight H2O_DecreasingLevelAlert;
+    private AlertLight H2O_IncreasingLevelAlert;
     private AlertLight CO_DecreasingLevelAlert;
     private AlertLight CO_IncreasingLevelAlert;
     private AlertLight CH4_DecreasingLevelAlert;
@@ -29,22 +31,22 @@ public class MainFrame extends JFrame implements Observer{
     @Override
     public void update(Observable obj, Object arg) {
         /*################# Labels text update #################*/
-        this.waterLevelLabel.setText(String.valueOf(this.water.readValue()));
+        this.H2O_LevelLabel.setText(String.valueOf(this.H2O_.readValue()));
         this.CO_LevelLabel.setText(String.valueOf(this.carbon.readValue()));
         this.CH4_LevelLabel.setText(String.valueOf(this.methane.readValue()));
 
-        /*################# Water alert lights update #################*/
-        if(this.water.readCurrentValue() > this.water.readLastMeasuredValue()){
-            this.waterIncreasingLevelAlert.setCurrentColorToOn();
-            this.waterDecreasingLevelAlert.setCurrentColorToOff();
-            this.water.updateLastMeasuredValue();
-        }else if(this.water.readCurrentValue() < this.water.readLastMeasuredValue()){
-            this.waterDecreasingLevelAlert.setCurrentColorToOn();
-            this.waterIncreasingLevelAlert.setCurrentColorToOff();
-            this.water.updateLastMeasuredValue();
+        /*################# H2O_ alert lights update #################*/
+        if(this.H2O_.readCurrentValue() > this.H2O_.readLastMeasuredValue()){
+            this.H2O_IncreasingLevelAlert.setCurrentColorToOn();
+            this.H2O_DecreasingLevelAlert.setCurrentColorToOff();
+            this.H2O_.updateLastMeasuredValue();
+        }else if(this.H2O_.readCurrentValue() < this.H2O_.readLastMeasuredValue()){
+            this.H2O_DecreasingLevelAlert.setCurrentColorToOn();
+            this.H2O_IncreasingLevelAlert.setCurrentColorToOff();
+            this.H2O_.updateLastMeasuredValue();
         }else{
-            this.waterDecreasingLevelAlert.setCurrentColorToOff();
-            this.waterIncreasingLevelAlert.setCurrentColorToOff();
+            this.H2O_DecreasingLevelAlert.setCurrentColorToOff();
+            this.H2O_IncreasingLevelAlert.setCurrentColorToOff();
         }
 
         /*################# Carbon monoxide alert lights update #################*/
@@ -90,12 +92,28 @@ public class MainFrame extends JFrame implements Observer{
         }
     }
     
-    public MainFrame(Device fan, Device pump, Sensor water, Sensor methane, Sensor carbon){
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(!this.systemRunning){
+            System.out.println("Lancement du système");
+            this.systemRunning = true;
+            this.startStopButton.setLabel("Arrêter le système");
+            // TODO : action Jinterface vers Erlang, lancement du système
+        }else{
+            System.out.println("Arrêt du système");
+            this.systemRunning = false;
+            this.startStopButton.setLabel("Lancer le système");
+            // TODO : action Jinterface vers Erlang, arrêt du système
+        }
+    }
+
+    public MainFrame(Device fan, Device pump, Sensor H2O_, Sensor methane, Sensor carbon){
+        this.systemRunning = false;
         this.fan = fan;
         this.pump = pump;
-        this.water = water;
+        this.H2O_ = H2O_;
         this.methane = methane;
-        this.carbon = carbon;    
+        this.carbon = carbon;
         
         /*################# Configuration de la fenêtre #################*/
         setSize(500, 500);
@@ -103,17 +121,17 @@ public class MainFrame extends JFrame implements Observer{
         setLayout(new GridLayout(6,1));
 
         /*################# EAU #################*/
-        Label waterLabel = new Label("Niveau d'eau :");
-        this.waterLevelLabel = new Label("0.0f");
-        this.waterDecreasingLevelAlert = new AlertLight(Color.CYAN);
-        this.waterIncreasingLevelAlert = new AlertLight(Color.CYAN);
-        FlowLayout waterElementsLayout = new FlowLayout();
-        Container waterElementsContainer = new Container();
-        waterElementsContainer.setLayout(waterElementsLayout);
-        waterElementsContainer.add(waterLabel, null);
-        waterElementsContainer.add(waterLevelLabel, null);
-        waterElementsContainer.add(waterDecreasingLevelAlert, null);
-        waterElementsContainer.add(waterIncreasingLevelAlert, null);
+        Label H2O_Label = new Label("Niveau d'eau :");
+        this.H2O_LevelLabel = new Label("0.0f");
+        this.H2O_DecreasingLevelAlert = new AlertLight(Color.CYAN);
+        this.H2O_IncreasingLevelAlert = new AlertLight(Color.CYAN);
+        FlowLayout H2O_ElementsLayout = new FlowLayout();
+        Container H2O_ElementsContainer = new Container();
+        H2O_ElementsContainer.setLayout(H2O_ElementsLayout);
+        H2O_ElementsContainer.add(H2O_Label, null);
+        H2O_ElementsContainer.add(H2O_LevelLabel, null);
+        H2O_ElementsContainer.add(H2O_DecreasingLevelAlert, null);
+        H2O_ElementsContainer.add(H2O_IncreasingLevelAlert, null);
         
         /*################# CO #################*/
         Label CO_Label = new Label("Niveau de CO :");
@@ -160,14 +178,14 @@ public class MainFrame extends JFrame implements Observer{
         pumpElementsContainer.add(pumpAlert, null);
 
         /*################# Bouton de lancement et d'arrêt du système #################*/
-        Button startStopButton = new Button("Lancer le système");
+        this.startStopButton = new Button("Lancer le système");
         FlowLayout startStopButtonLayout = new FlowLayout();
         Container startStopButtonContainer = new Container();
         startStopButtonContainer.setLayout(startStopButtonLayout);
         startStopButtonContainer.add(startStopButton);
 
         /*################# Ajout des éléments à la fenêtre #################*/
-        add(waterElementsContainer);
+        add(H2O_ElementsContainer);
         add(CH4_ElementsContainer);
         add(CO_ElementsContainer);
         add(fanElementsContainer);
@@ -175,11 +193,12 @@ public class MainFrame extends JFrame implements Observer{
         add(startStopButtonContainer);
     
         /*################# Observables configuration #################*/
-        fan.addObserver(this);
-        pump.addObserver(this);
-        water.addObserver(this);
-        methane.addObserver(this);
-        carbon.addObserver(this);
+        this.fan.addObserver(this);
+        this.pump.addObserver(this);
+        this.H2O_.addObserver(this);
+        this.methane.addObserver(this);
+        this.carbon.addObserver(this);
+        this.startStopButton.addActionListener(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
