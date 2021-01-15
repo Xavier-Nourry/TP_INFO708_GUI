@@ -1,6 +1,8 @@
 package TP_INFO708_GUI.src.model;
 
-public class Device {
+import java.util.Observable;
+
+public class Device extends Observable{
     public String name;
     private boolean state;
 
@@ -11,5 +13,9 @@ public class Device {
 
     public boolean getState(){ return this.state; }
     
-    public void setState(boolean newState){ this.state = newState; }
+    public void setState(boolean newState){ 
+        this.state = newState;
+        setChanged();
+        notifyObservers();
+    }
 }

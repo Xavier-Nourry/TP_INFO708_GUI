@@ -11,7 +11,6 @@ public class AlertLight extends Canvas{
         this.colorOn = color; 
         this.colorOff = colorOn.darker();
         this.currentColor = this.colorOff;
-        setBackground(Color.WHITE);
         setSize(32, 32);
     }
 

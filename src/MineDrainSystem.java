@@ -13,6 +13,6 @@ public class MineDrainSystem{
         Sensor methane = new Sensor(DataToMeasure.CH4);
         Sensor carbonMonoxide = new Sensor(DataToMeasure.CO);
 
-        MainFrame mainFrame = new MainFrame();
+        MainFrame mainFrame = new MainFrame(fan, pump, water, methane, carbonMonoxide);
     }
 }
