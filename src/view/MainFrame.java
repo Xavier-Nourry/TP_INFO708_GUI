@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import TP_INFO708_GUI.src.model.*;
 import TP_INFO708_GUI.src.view.*;
+import view.ArrowLight;
 
 public class MainFrame extends JFrame implements Observer, ActionListener{
     private boolean systemRunning;
@@ -19,12 +20,12 @@ public class MainFrame extends JFrame implements Observer, ActionListener{
     private Sensor H2O_;
     private Sensor methane;
     private Sensor carbon;
-    private AlertLight H2O_DecreasingLevelAlert;
-    private AlertLight H2O_IncreasingLevelAlert;
-    private AlertLight CO_DecreasingLevelAlert;
-    private AlertLight CO_IncreasingLevelAlert;
-    private AlertLight CH4_DecreasingLevelAlert;
-    private AlertLight CH4_IncreasingLevelAlert;
+    private ArrowLight H2O_DecreasingLevelAlert;
+    private ArrowLight H2O_IncreasingLevelAlert;
+    private ArrowLight CO_DecreasingLevelAlert;
+    private ArrowLight CO_IncreasingLevelAlert;
+    private ArrowLight CH4_DecreasingLevelAlert;
+    private ArrowLight CH4_IncreasingLevelAlert;
     private AlertLight fanAlert;
     private AlertLight pumpAlert;
 
@@ -123,8 +124,8 @@ public class MainFrame extends JFrame implements Observer, ActionListener{
         /*################# EAU #################*/
         Label H2O_Label = new Label("Niveau d'eau :");
         this.H2O_LevelLabel = new Label("0.0f");
-        this.H2O_DecreasingLevelAlert = new AlertLight(Color.CYAN);
-        this.H2O_IncreasingLevelAlert = new AlertLight(Color.CYAN);
+        this.H2O_DecreasingLevelAlert = new ArrowLight(Color.CYAN, false);
+        this.H2O_IncreasingLevelAlert = new ArrowLight(Color.CYAN, true);
         FlowLayout H2O_ElementsLayout = new FlowLayout();
         Container H2O_ElementsContainer = new Container();
         H2O_ElementsContainer.setLayout(H2O_ElementsLayout);
@@ -136,8 +137,8 @@ public class MainFrame extends JFrame implements Observer, ActionListener{
         /*################# CO #################*/
         Label CO_Label = new Label("Niveau de CO :");
         this.CO_LevelLabel = new Label("0.0f");
-        this.CO_DecreasingLevelAlert = new AlertLight(Color.GREEN);
-        this.CO_IncreasingLevelAlert = new AlertLight(Color.GREEN);
+        this.CO_DecreasingLevelAlert = new ArrowLight(Color.GREEN, false);
+        this.CO_IncreasingLevelAlert = new ArrowLight(Color.GREEN, true);
         FlowLayout CO_ElementsLayout = new FlowLayout();
         Container CO_ElementsContainer = new Container();
         CO_ElementsContainer.setLayout(CO_ElementsLayout);
@@ -149,8 +150,8 @@ public class MainFrame extends JFrame implements Observer, ActionListener{
         /*################# CH4 #################*/
         Label CH4_Label = new Label("Niveau de CH4 :");
         this.CH4_LevelLabel = new Label("0.0f");
-        this.CH4_DecreasingLevelAlert = new AlertLight(Color.YELLOW);
-        this.CH4_IncreasingLevelAlert = new AlertLight(Color.YELLOW);
+        this.CH4_DecreasingLevelAlert = new ArrowLight(Color.YELLOW, false);
+        this.CH4_IncreasingLevelAlert = new ArrowLight(Color.YELLOW, true);
         FlowLayout CH4_ElementsLayout = new FlowLayout();
         Container CH4_ElementsContainer = new Container();
         CH4_ElementsContainer.setLayout(CH4_ElementsLayout);
